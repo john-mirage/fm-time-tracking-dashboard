@@ -1,0 +1,29 @@
+.web-activity-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .web-activity-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .web-activity-list {
+    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1158px) {
+  .web-activity-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
