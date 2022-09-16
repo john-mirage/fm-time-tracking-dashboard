@@ -40,22 +40,22 @@
   <!-- web app -->
   <main class="web-app" is="web-app">
     <!-- web menu -->
-    <header class="web-menu" is="web-menu">
+    <header class="web-menu" is="web-menu" data-id="web-menu" data-period="week">
       <div class="web-menu__user">
-        <img class="web-menu__avatar" src="src/images/image-jeremy.png" alt="avatar picture">
+        <img class="web-menu__avatar" src="src/images/image-jeremy.png" alt="avatar picture" draggable="false">
         <div class="web-menu__info">
           <p class="web-menu__report">Report for</p>
           <h1 class="web-menu__name">Jeremy Robson</h1>
         </div>
       </div>
       <div class="web-menu__button-group">
-        <button class="web-menu__button" data-id="period-button" data-name="day" data-period="daily">Daily</button>
-        <button class="web-menu__button" data-id="period-button" data-name="week" data-period="weekly">Weekly</button>
-        <button class="web-menu__button" data-id="period-button" data-name="month" data-period="monthly">Monthly</button>
+        <button class="web-menu__button" data-id="period-button" data-period="day" disabled>Daily</button>
+        <button class="web-menu__button" data-id="period-button" data-period="week" disabled>Weekly</button>
+        <button class="web-menu__button" data-id="period-button" data-period="month" disabled>Monthly</button>
       </div>
     </header>
     <!-- web activity list -->
-    <ul class="web-activity-list" is="web-activity-list"></ul>
+    <ul class="web-activity-list" is="web-activity-list" data-id="web-activity-list"></ul>
   </main>
 
   <!-- Template | web activity -->
