@@ -8,9 +8,9 @@ declare namespace AppData {
     name: string;
     timeframes: {
       [period: string]: Period;
-      daily: Period;
-      weekly: Period;
-      monthly: Period;
+      day: Period;
+      week: Period;
+      month: Period;
     }
   }
 }

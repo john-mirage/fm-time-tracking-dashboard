@@ -8,6 +8,10 @@ class WebActivity extends HTMLLIElement {
   previousPeriodElement: HTMLSpanElement;
   previousValueElement: HTMLSpanElement;
 
+  static get observedAttributes() {
+    return ["data-period"];
+  }
+
   constructor() {
     super();
     const template = <HTMLTemplateElement>document.getElementById("template-web-activity");
@@ -31,9 +35,18 @@ class WebActivity extends HTMLLIElement {
     const activityName = this.#activity.name.replace(" ", "-").toLowerCase();
     this.classList.add(`web-activity--${activityName}`);
     this.nameElement.textContent = this.#activity.name;
-    this.currentValueElement.textContent = `${String(this.#activity.timeframes.weekly.current)}${this.#activity.timeframes.weekly.current > 1 ? "hrs" : "hr"}`;
-    this.previousValueElement.textContent = `${String(this.#activity.timeframes.weekly.previous)}${this.#activity.timeframes.weekly.previous > 1 ? "hrs" : "hr"}`;
-    this.previousPeriodElement.textContent = "week";
+  }
+
+  get period(): string | undefined {
+    return this.dataset.period;
+  }
+
+  set period(newPeriod: string | undefined) {
+    if (newPeriod) {
+      this.dataset.period = newPeriod;
+    } else {
+      delete this.dataset.period;
+    }
   }
 
   connectedCallback() {
@@ -43,6 +56,7 @@ class WebActivity extends HTMLLIElement {
       this.#initialMount = false;
     }
     this.upgradeProperty("activity");
+    this.upgradeProperty("period");
   }
 
   upgradeProperty(prop: string) {
@@ -50,6 +64,26 @@ class WebActivity extends HTMLLIElement {
       let value = this[prop];
       delete this[prop];
       this[prop] = value;
+    }
+  }
+
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
+    switch (name) {
+      case "data-period":
+        if (typeof newValue === "string") {
+          const currentValue = this.activity.timeframes[newValue].current;
+          const previousValue = this.activity.timeframes[newValue].previous
+          this.currentValueElement.textContent = `${String(currentValue)}${currentValue > 1 ? "hrs" : "hr"}`;
+          this.previousPeriodElement.textContent = newValue;
+          this.previousValueElement.textContent = `${String(previousValue)}${previousValue > 1 ? "hrs" : "hr"}`;;
+        } else {
+          this.currentValueElement.textContent = "";
+          this.previousPeriodElement.textContent = "";
+          this.previousValueElement.textContent = "";
+        }
+        break;
+      default:
+        throw new Error("The modified attribute is not valid");
     }
   }
 }
