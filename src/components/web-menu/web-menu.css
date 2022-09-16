@@ -30,7 +30,7 @@
 }
 
 .web-menu__info {
-  flex: 1 1 0;
+  flex: 1;
 }
 
 .web-menu__report {
@@ -121,7 +121,7 @@
   }
 
   .web-menu__user {
-    flex: 1 1 0;
+    flex: 1;
     flex-direction: column;
     align-items: flex-start;
     padding: 2.125rem 1.75rem;
@@ -140,7 +140,7 @@
   .web-menu__button-group {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    flex: 0 0 auto;
+    flex: none;
     flex-direction: column;
   }
 

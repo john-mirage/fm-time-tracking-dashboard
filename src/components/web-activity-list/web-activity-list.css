@@ -18,12 +18,12 @@
 @media screen and (min-width: 992px) {
   .web-activity-list {
     flex: 1;
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media screen and (min-width: 1158px) {
   .web-activity-list {
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 }
