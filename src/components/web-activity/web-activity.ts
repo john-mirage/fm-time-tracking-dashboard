@@ -4,9 +4,8 @@ class WebActivity extends HTMLLIElement {
   #templateFragment: DocumentFragment;
   #activity?: AppData.Activity;
   nameElement: HTMLHeadingElement;
-  currentValueElement: HTMLSpanElement;
-  previousPeriodElement: HTMLSpanElement;
-  previousValueElement: HTMLSpanElement;
+  currentElement: HTMLParagraphElement;
+  previousElement: HTMLParagraphElement;
 
   static get observedAttributes() {
     return ["data-period"];
@@ -17,9 +16,8 @@ class WebActivity extends HTMLLIElement {
     const template = <HTMLTemplateElement>document.getElementById("template-web-activity");
     this.#templateFragment = <DocumentFragment>template.content.cloneNode(true);
     this.nameElement = <HTMLHeadingElement>this.#templateFragment.querySelector('[data-id="web-activity-name"]');
-    this.currentValueElement = <HTMLSpanElement>this.#templateFragment.querySelector('[data-id="web-activity-current-value"]');
-    this.previousPeriodElement = <HTMLSpanElement>this.#templateFragment.querySelector('[data-id="web-activity-previous-period"]');
-    this.previousValueElement = <HTMLSpanElement>this.#templateFragment.querySelector('[data-id="web-activity-previous-value"]');
+    this.currentElement = <HTMLParagraphElement>this.#templateFragment.querySelector('[data-id="web-activity-current"]');
+    this.previousElement = <HTMLParagraphElement>this.#templateFragment.querySelector('[data-id="web-activity-previous"]');
   }
 
   get activity(): AppData.Activity {
@@ -72,14 +70,12 @@ class WebActivity extends HTMLLIElement {
       case "data-period":
         if (typeof newValue === "string") {
           const currentValue = this.activity.timeframes[newValue].current;
-          const previousValue = this.activity.timeframes[newValue].previous
-          this.currentValueElement.textContent = `${String(currentValue)}${currentValue > 1 ? "hrs" : "hr"}`;
-          this.previousPeriodElement.textContent = newValue;
-          this.previousValueElement.textContent = `${String(previousValue)}${previousValue > 1 ? "hrs" : "hr"}`;;
+          const previousValue = this.activity.timeframes[newValue].previous;
+          this.currentElement.textContent = `${String(currentValue)}${currentValue > 1 ? "hrs" : "hr"}`;
+          this.previousElement.textContent = `Last ${newValue} - ${String(previousValue)}${previousValue > 1 ? "hrs" : "hr"}`;
         } else {
-          this.currentValueElement.textContent = "";
-          this.previousPeriodElement.textContent = "";
-          this.previousValueElement.textContent = "";
+          this.currentElement.textContent = "";
+          this.previousElement.textContent = "";
         }
         break;
       default:
