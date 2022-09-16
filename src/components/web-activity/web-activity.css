@@ -1,53 +1,53 @@
 .web-activity {
   width: 100%;
   height: auto;
-  border-radius: 1.4rem;
-  padding-top: 3.8rem;
-  background-position: top -1rem right 1.6rem, center;
+  border-radius: 0.875rem;
+  padding-top: 2.375rem;
+  background-position: top -0.625rem right 1rem, center;
   background-repeat: no-repeat;
 }
 
 .web-activity--work {
   background-image:
-      url("/src/images/icon-work.svg"),
-      linear-gradient(to bottom, var(--color-work) 0% 50%, var(--color-dark-blue) 50% 100%);
+    url("/src/images/icon-work.svg"),
+    linear-gradient(to bottom, var(--color-work) 0% 50%, var(--color-dark-blue) 50% 100%);
 }
 
 .web-activity--play {
   background-image:
-      url("/src/images/icon-play.svg"),
-      linear-gradient(to bottom, var(--color-play) 0% 50%, var(--color-dark-blue) 50% 100%);
+    url("/src/images/icon-play.svg"),
+    linear-gradient(to bottom, var(--color-play) 0% 50%, var(--color-dark-blue) 50% 100%);
 }
 
 .web-activity--study {
   background-image:
-      url("/src/images/icon-study.svg"),
-      linear-gradient(to bottom, var(--color-study) 0% 50%, var(--color-dark-blue) 50% 100%);
+    url("/src/images/icon-study.svg"),
+    linear-gradient(to bottom, var(--color-study) 0% 50%, var(--color-dark-blue) 50% 100%);
 }
 
 .web-activity--exercise {
   background-image:
-      url("/src/images/icon-exercise.svg"),
-      linear-gradient(to bottom, var(--color-exercise) 0% 50%, var(--color-dark-blue) 50% 100%);
+    url("/src/images/icon-exercise.svg"),
+    linear-gradient(to bottom, var(--color-exercise) 0% 50%, var(--color-dark-blue) 50% 100%);
 }
 
 .web-activity--social {
   background-image:
-      url("/src/images/icon-social.svg"),
-      linear-gradient(to bottom, var(--color-social) 0% 50%, var(--color-dark-blue) 50% 100%);
+    url("/src/images/icon-social.svg"),
+    linear-gradient(to bottom, var(--color-social) 0% 50%, var(--color-dark-blue) 50% 100%);
 }
 
 .web-activity--self-care {
   background-image:
-      url("/src/images/icon-self-care.svg"),
-      linear-gradient(to bottom, var(--color-self-care) 0% 50%, var(--color-dark-blue) 50% 100%);
+    url("/src/images/icon-self-care.svg"),
+    linear-gradient(to bottom, var(--color-self-care) 0% 50%, var(--color-dark-blue) 50% 100%);
 }
 
 .web-activity__content {
   width: 100%;
   height: auto;
-  padding: 2.4rem;
-  border-radius: 1.4rem;
+  padding: 1.5rem;
+  border-radius: 0.875rem;
   background-color: var(--color-dark-blue);
   cursor: pointer;
 }
@@ -66,7 +66,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .web-activity__row--bottom {
@@ -75,8 +75,8 @@
   align-items: flex-start;
 }
 
-.web-activity__title {
-  font-size: 1.8rem;
+.web-activity__name {
+  font-size: 1.125rem;
   font-weight: 500;
   color: var(--color-white);
   margin: 0;
@@ -84,10 +84,10 @@
 
 .web-activity__button {
   display: flex;
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 9999px;
-  margin-right: -0.8rem;
+  margin-right: -0.5rem;
   border: none;
   background-color: transparent;
   color: var(--color-pale-blue);
@@ -107,20 +107,20 @@
 }
 
 .web-activity__icon {
-  width: 2rem;
-  height: auto;
+  width: 1.25rem;
+  height: 1.25rem;
   margin: auto;
 }
 
 .web-activity__current {
-  font-size: 3.2rem;
+  font-size: 2rem;
   font-weight: 300;
   color: var(--color-white);
-  margin: 0 0 0.4rem 0;
+  margin: 0 0 0.25rem 0;
 }
 
 .web-activity__previous {
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   color: var(--color-pale-blue);
   margin: 0;
@@ -128,34 +128,35 @@
 
 @media screen and (min-width: 375px) {
   .web-activity__row--bottom {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
+
 @media screen and (min-width: 992px) {
   .web-activity__row--bottom {
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 
 @media screen and (min-width: 1158px) {
   .web-activity {
-      padding-top: 4.5rem;
+    padding-top: 2.8125rem;
   }
 
   .web-activity__content {
-      padding: 2.8rem;
+    padding: 1.75rem;
   }
 
   .web-activity__row--top {
-      margin-bottom: 1.6rem;
+    margin-bottom: 1rem;
   }
 
   .web-activity__current {
-      font-size: 5.6rem;
-      margin-bottom: 0.8rem;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
   }
 }
