@@ -30,50 +30,61 @@
 </head>
 
 <body class="page">
+  <!-- icons -->
+  <svg class="page__icons" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-more" viewBox="0 0 21 5">
+      <path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill-rule="evenodd"/>
+    </symbol>
+  </svg>
 
-  <!-- App -->
-  <main class="page__app">
-    <app-dashboard></app-dashboard>
-  </main>
-
-  <!-- Template | Menu -->
-  <template id="template-menu">
-    <header class="menu">
-      <div class="menu__user">
-        <img class="menu__avatar" src="/src/images/image-jeremy.png" alt="avatar picture">
-        <div class="menu__info">
-          <p class="menu__report">Report for</p>
-          <h1 class="menu__name">Jeremy Robson</h1>
+  <!-- web app -->
+  <main class="web-app" is="web-app">
+    <!-- web menu -->
+    <header class="web-menu" is="web-menu">
+      <div class="web-menu__user">
+        <img class="web-menu__avatar" src="src/images/image-jeremy.png" alt="avatar picture">
+        <div class="web-menu__info">
+          <p class="web-menu__report">Report for</p>
+          <h1 class="web-menu__name">Jeremy Robson</h1>
         </div>
       </div>
-      <div class="menu__period">
-        <button class="menu__button" data-name="day" data-period="daily">Daily</button>
-        <button class="menu__button" data-name="week" data-period="weekly">Weekly</button>
-        <button class="menu__button" data-name="month" data-period="monthly">Monthly</button>
+      <div class="web-menu__button-group">
+        <button class="web-menu__button" data-name="day" data-period="daily">Daily</button>
+        <button class="web-menu__button" data-name="week" data-period="weekly">Weekly</button>
+        <button class="web-menu__button" data-name="month" data-period="monthly">Monthly</button>
       </div>
     </header>
-  </template>
+    <!-- web activity list -->
+    <ul class="web-activity-list" is="web-activity-list"></ul>
+  </main>
 
-  <!-- Template | Stat -->
-  <template id="template-stat">
-    <section class="stat">
-      <div class="stat__content">
-        <div class="stat__row stat__row--top">
-          <h2 class="stat__title"></h2>
-          <button class="stat__button" aria-label="more info">
-            <svg class="stat__icon" viewBox="0 0 21 5" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/>
-            </svg>
-          </button>
-        </div>
-        <div class="stat__row stat__row--bottom">
-          <p class="stat__current"><span class="stat__current-value"></span><span class="stat__current-time-unit"></span></p>
-          <p class="stat__previous">Last <span class="stat__previous-period"></span> - <span class="stat__previous-value"></span></p>
-        </div>
+  <!-- Template | web activity -->
+  <template id="template-web-activity">
+    <div class="web-activity__content">
+      <div class="web-activity__row web-activity__row--top">
+        <h2 class="web-activity__name" data-id="web-activity-name"></h2>
+        <button class="web-activity__button" aria-label="more info">
+          <svg class="web-activity__icon" fill="currentColor">
+            <use href="#icon-more"/>
+          </svg>
+        </button>
       </div>
-    </section>
+      <div class="web-activity__row web-activity__row--bottom">
+        <p class="web-activity__current">
+          <span class="web-activity__current-value" data-id="web-activity-current-value"></span>
+          <span class="web-activity__current-value-unit" data-id="web-activity-current-value-unit"></span>
+        </p>
+        <p class="web-activity__previous">
+          <span>Last </span>
+          <span class="web-activity__previous-period" data-id="web-activity-previous-period"></span>
+          <span> - </span>
+          <span class="web-activity__previous-value" data-id="web-activity-previous-value"></span>
+        </p>
+      </div>
+    </div>
   </template>
 
+  <!-- module -->
   <script type="module" src="/src/main.ts"></script>
 </body>
 

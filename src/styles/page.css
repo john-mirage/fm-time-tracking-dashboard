@@ -1,37 +1,10 @@
 .page {
     display: flex;
-    width: 100%;
-    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
     background-color: var(--color-very-dark-blue);
 }
 
-.page__app {
-    width: 100%;
-    height: auto;
-    margin: auto;
-    padding: 8rem 2.4rem;
-}
-
-@media screen and (min-width: 375px) {
-    .page__app {
-        max-width: 375px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .page__app {
-        max-width: 768px;
-    }
-}
-
-@media screen and (min-width: 992px) {
-    .page__app {
-        max-width: 992px;
-    }
-}
-
-@media screen and (min-width: 1158px) {
-    .page__app {
-        max-width: 1200px;
-    }
+.page__icons {
+  display: none;
 }

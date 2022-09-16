@@ -1,7 +1,10 @@
+@import "styles/reset.css";
 @import "styles/page.css";
-@import "styles/dashboard.css";
-@import "styles/menu.css";
-@import "styles/stat.css";
+
+@import "components/web-app/web-app.css";
+@import "components/web-menu/web-menu.css";
+@import "components/web-activity-list/web-activity-list.css";
+@import "components/web-activity/web-activity.css";
 
 :root {
   --color-work: hsl(15, 100%, 70%);
@@ -17,29 +20,4 @@
   --color-desaturated-blue: hsl(236, 41%, 34%);
   --color-pale-blue: hsl(236, 100%, 87%);
   --color-white: hsl(0, 0%, 100%);
-}
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 10px;
-}
-
-body {
-  margin: 0;
-  font-family:
-    'Rubik',
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif,
-    'Apple Color Emoji',
-    'Segoe UI Emoji';
 }

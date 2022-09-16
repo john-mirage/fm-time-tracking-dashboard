@@ -1,0 +1,149 @@
+.web-menu {
+  width: 100%;
+  height: auto;
+  background-color: var(--color-dark-blue);
+  border-radius: 0.875rem;
+}
+
+.web-menu__user {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  border-radius: 0.875rem;
+  padding: 2rem 1.75rem;
+  background-color: var(--color-blue);
+}
+
+.web-menu__avatar {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  flex: none;
+  max-width: 100%;
+  width: 4.375rem;
+  height: 4.375rem;
+  border-radius: 50%;
+  border: 0.1875rem solid var(--color-white);
+}
+
+.web-menu__info {
+  flex: 1 1 0;
+}
+
+.web-menu__report {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-pale-blue);
+  margin: 0 0 0.4rem 0;
+}
+
+.web-menu__name {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.web-menu__button-group {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.web-menu__button {
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  padding: 0 0 0 1.75rem;
+  border: none;
+  background-color: transparent;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-pale-blue);
+  cursor: pointer;
+  text-align: left;
+}
+
+.web-menu__button:focus-visible {
+  outline: none;
+  background-color: var(--color-dark-blue-hover);
+  color: var(--color-white);
+}
+
+.web-menu__button:hover {
+  color: var(--color-white);
+}
+
+.web-menu__button--active {
+  color: var(--color-white);
+  cursor: default;
+}
+
+@media screen and (min-width: 375px) {
+  .web-menu__user {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .web-menu__avatar {
+    margin-bottom: 0;
+  }
+
+  .web-menu__button-group {
+    flex-direction: row;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .web-menu__button {
+    flex: 1;
+    height: 4.375rem;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .web-menu {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    width: 256px;
+  }
+
+  .web-menu__user {
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.125rem 1.75rem;
+  }
+
+  .web-menu__avatar {
+    margin-bottom: 2.5rem;
+    width: 5.25rem;
+    height: 5.25rem;
+  }
+
+  .web-menu__name {
+    font-size: 2.5rem;
+  }
+
+  .web-menu__button-group {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex: 0 0 auto;
+    flex-direction: column;
+  }
+
+  .web-menu__button {
+    flex: none;
+    height: 3rem;
+    padding: 0 0 0 1.75rem;
+    text-align: left;
+  }
+}

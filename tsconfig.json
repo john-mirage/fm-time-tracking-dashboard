@@ -17,9 +17,10 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["src/components/*"],
+      "@data/*": ["src/data/*"],
       "@images/*": ["src/images/*"],
       "@styles/*": ["src/styles/*"],
-      "@data/*": ["src/data/*"],
     }
   },
   "include": ["src"]
