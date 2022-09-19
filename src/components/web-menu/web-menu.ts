@@ -1,14 +1,16 @@
 class WebMenu extends HTMLElement {
   [key: string]: any;
   #initialMount = true;
+  #spinnerElement = document.createElement("span");
   buttonElements: NodeListOf<HTMLButtonElement>;
 
   static get observedAttributes() {
-    return ["data-period"];
+    return ["data-period", "disabled"];
   }
 
   constructor() {
     super();
+    this.#spinnerElement.classList.add("web-menu__button-spinner");
     this.buttonElements = <NodeListOf<HTMLButtonElement>>this.querySelectorAll('[data-id="period-button"]');
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
@@ -25,12 +27,26 @@ class WebMenu extends HTMLElement {
     }
   }
 
+  get disabled(): boolean {
+    return this.hasAttribute("disabled");
+  }
+
+  set disabled(isDisabled: boolean) {
+    if (isDisabled) {
+      this.setAttribute("disabled", "");
+    } else {
+      this.removeAttribute("disabled");
+    }
+  }
+
   connectedCallback() {
     if (this.#initialMount) {
       this.classList.add("web-menu");
       this.#initialMount = false;
     }
     this.upgradeProperty("period");
+    this.upgradeProperty("disabled");
+    if (!this.period) this.disabled = true;
     this.buttonElements.forEach((buttonElement) => buttonElement.addEventListener("click", this.handleButtonClick));
   }
 
@@ -50,14 +66,18 @@ class WebMenu extends HTMLElement {
     switch (name) {
       case "data-period":
         if (typeof newValue === "string") {
-          this.updateButtons();
-          const customEvent = new CustomEvent("update-period", {
-            bubbles: true,
-            detail: { period: this.period }
-          });
-          this.dispatchEvent(customEvent);
-        } else {
           this.disableButtons();
+          this.sendPeriodChangeEvent();
+        } else {
+          this.disabled = true;
+        }
+        break;
+      case "disabled":
+        const isDisabled = newValue !== null;
+        if (isDisabled) {
+          this.disableButtons();
+        } else {
+          this.enableButtons();
         }
         break;
       default:
@@ -67,19 +87,39 @@ class WebMenu extends HTMLElement {
 
   disableButtons() {
     this.buttonElements.forEach((buttonElement) => {
+      const currentButtonIsActive = this.period === buttonElement.dataset.period;
+      if (currentButtonIsActive) {
+        buttonElement.append(this.#spinnerElement);
+        if (!buttonElement.classList.contains("web-menu__button--active")) {
+          buttonElement.classList.add("web-menu__button--active");
+        }
+      } else if (buttonElement.classList.contains("web-menu__button--active")) {
+        buttonElement.classList.remove("web-menu__button--active");
+      }
       if (!buttonElement.hasAttribute("disabled")) buttonElement.setAttribute("disabled", "");
     });
   }
 
-  updateButtons() {
+  enableButtons() {
     this.buttonElements.forEach((buttonElement) => {
+      this.#spinnerElement.remove();
       const currentButtonIsActive = this.period === buttonElement.dataset.period;
       if (currentButtonIsActive) {
+        if (!buttonElement.classList.contains("web-menu__button--active")) buttonElement.classList.add("web-menu__button--active");
         if (!buttonElement.hasAttribute("disabled")) buttonElement.setAttribute("disabled", "");
-      } else if (buttonElement.hasAttribute("disabled")) {
-        buttonElement.removeAttribute("disabled");
+      } else {
+        if (buttonElement.classList.contains("web-menu__button--active")) buttonElement.classList.remove("web-menu__button--active");
+        if (buttonElement.hasAttribute("disabled")) buttonElement.removeAttribute("disabled");
       }
     });
+  }
+
+  sendPeriodChangeEvent() {
+    const customEvent = new CustomEvent("update-period", {
+      bubbles: true,
+      detail: { period: this.period }
+    });
+    this.dispatchEvent(customEvent);
   }
 
   handleButtonClick(event: MouseEvent) {

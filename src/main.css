@@ -20,4 +20,6 @@
   --color-desaturated-blue: hsl(236, 41%, 34%);
   --color-pale-blue: hsl(236, 100%, 87%);
   --color-white: hsl(0, 0%, 100%);
+  --color-spinner-fg: hsl(0, 0%, 100%);
+  --color-spinner-bg: hsl(236, 41%, 38%);
 }
