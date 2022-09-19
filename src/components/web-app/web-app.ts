@@ -16,6 +16,7 @@ class WebApp extends HTMLElement {
     this.webMenu = <WebMenu>this.querySelector('[data-id="web-menu"]');
     this.webActivityList = <WebActivityList>this.querySelector('[data-id="web-activity-list"]');
     this.handlePeriodUpdate = this.handlePeriodUpdate.bind(this);
+    this.handlePeriodHasBeenUpdated = this.handlePeriodHasBeenUpdated.bind(this);
   }
 
   get period(): string | undefined {
@@ -36,10 +37,12 @@ class WebApp extends HTMLElement {
       this.#initialMount = false;
     }
     this.addEventListener("update-period", this.handlePeriodUpdate);
+    this.addEventListener("period-has-been-updated", this.handlePeriodHasBeenUpdated);
   }
 
   disconnectedCallback() {
     this.removeEventListener("update-period", this.handlePeriodUpdate);
+    this.removeEventListener("period-has-been-updated", this.handlePeriodHasBeenUpdated);
   }
 
   upgradeProperty(prop: string) {
@@ -65,6 +68,10 @@ class WebApp extends HTMLElement {
     const { period } = (<CustomEvent>customEvent).detail;
     this.period = period;
     console.log("period is now: ", period);
+  }
+
+  handlePeriodHasBeenUpdated() {
+    this.webMenu.enableButtons();
   }
 }
 

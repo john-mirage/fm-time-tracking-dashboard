@@ -123,7 +123,7 @@ class WebMenu extends HTMLElement {
   }
 
   handleButtonClick(event: MouseEvent) {
-    const period = (<HTMLButtonElement>event.target).dataset.period;
+    const period = (<HTMLButtonElement>event.currentTarget).dataset.period;
     if (typeof period === "string") {
       this.period = period;
     } else {

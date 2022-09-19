@@ -1,11 +1,15 @@
 class WebActivity extends HTMLLIElement {
   [key: string]: any;
   #initialMount = true;
+  #initialAnimation = true;
   #templateFragment: DocumentFragment;
   #activity?: AppData.Activity;
+  #animationTimeline?: gsap.core.Timeline;
   nameElement: HTMLHeadingElement;
+  bottomRowElement: HTMLDivElement;
   currentElement: HTMLParagraphElement;
   previousElement: HTMLParagraphElement;
+  
 
   static get observedAttributes() {
     return ["data-period"];
@@ -16,6 +20,7 @@ class WebActivity extends HTMLLIElement {
     const template = <HTMLTemplateElement>document.getElementById("template-web-activity");
     this.#templateFragment = <DocumentFragment>template.content.cloneNode(true);
     this.nameElement = <HTMLHeadingElement>this.#templateFragment.querySelector('[data-id="web-activity-name"]');
+    this.bottomRowElement = <HTMLDivElement>this.#templateFragment.querySelector('[data-id="web-activity-bottom-row"]');
     this.currentElement = <HTMLParagraphElement>this.#templateFragment.querySelector('[data-id="web-activity-current"]');
     this.previousElement = <HTMLParagraphElement>this.#templateFragment.querySelector('[data-id="web-activity-previous"]');
   }
@@ -47,6 +52,18 @@ class WebActivity extends HTMLLIElement {
     }
   }
 
+  get animationTimeline(): gsap.core.Timeline | undefined {
+    return this.#animationTimeline;
+  }
+
+  set animationTimeline(newAnimationTimeline: gsap.core.Timeline | undefined) {
+    if (newAnimationTimeline) {
+      this.#animationTimeline = newAnimationTimeline;
+    } else {
+      this.#animationTimeline = undefined;
+    }
+  }
+
   connectedCallback() {
     if (this.#initialMount) {
       this.classList.add("web-activity");
@@ -55,6 +72,15 @@ class WebActivity extends HTMLLIElement {
     }
     this.upgradeProperty("activity");
     this.upgradeProperty("period");
+    this.upgradeProperty("animationTimeline");
+    this.animationTimeline?.from(this.bottomRowElement, {
+      onComplete: () => { if (this.#animationTimeline) this.#initialAnimation = false; },
+      opacity: 0,
+      x: "2rem",
+      duration: 1,
+      ease: "power1",
+      clearProps: "all",
+    }, "initial");
   }
 
   upgradeProperty(prop: string) {
@@ -68,7 +94,10 @@ class WebActivity extends HTMLLIElement {
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
       case "data-period":
-        if (typeof newValue === "string") {
+        if (this.isConnected && !this.#initialAnimation) {
+          this.animationTimeline?.restart();
+        }
+        if (typeof newValue === "string") { 
           const currentValue = this.activity.timeframes[newValue].current;
           const previousValue = this.activity.timeframes[newValue].previous;
           this.currentElement.textContent = `${String(currentValue)}${currentValue > 1 ? "hrs" : "hr"}`;

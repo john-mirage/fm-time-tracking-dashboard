@@ -5,6 +5,7 @@
   padding-top: 2.375rem;
   background-position: top -0.625rem right 1rem, center;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 .web-activity--work {
