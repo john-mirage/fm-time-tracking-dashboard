@@ -1,12 +1,32 @@
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .web-menu {
   margin-bottom: 1.5rem;
   width: 100%;
   height: auto;
-  background-color: var(--color-dark-blue);
-  border-radius: 0.875rem;
 }
 
 .web-menu__user {
+  position: relative;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -16,6 +36,7 @@
   border-radius: 0.875rem;
   padding: 2rem 1.75rem;
   background-color: var(--color-blue);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .web-menu__avatar {
@@ -48,27 +69,43 @@
 }
 
 .web-menu__button-group {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  position: relative;
+  z-index: 90;
+  margin-top: -2rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: auto;
+  background-color: var(--color-dark-blue);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-bottom-left-radius: 0.875rem;
+  border-bottom-right-radius: 0.875rem;
+  animation-name: fadeInDown;
+  animation-duration: 1000ms;
+  animation-fill-mode: backwards;
 }
 
 .web-menu__button {
   position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
   height: 3rem;
-  padding: 0 0 0 1.75rem;
+  padding: 0 1.75rem;
   border: none;
   background-color: transparent;
-  font-size: 1.125rem;
-  font-weight: 400;
   color: var(--color-pale-blue);
   cursor: pointer;
-  text-align: left;
-  transition: color 150ms;
+  transition-property: background-color;
+  transition-duration: 150ms;
+}
+
+.web-menu__button--active {
+  color: var(--color-white);
 }
 
 .web-menu__button:focus-visible {
@@ -77,13 +114,31 @@
   color: var(--color-white);
 }
 
-.web-menu__button:not(:disabled):hover {
-  color: var(--color-white);
+.web-menu__button:disabled {
+  cursor: default;
 }
 
-.web-menu__button:disabled {
+.web-menu__button:not(:disabled):hover {
   color: var(--color-white);
-  cursor: default;
+  background-color: var(--color-dark-blue-hover);
+}
+
+.web-menu__button-label {
+  font-size: 1.125rem;
+  font-weight: 400;
+  transition-property: color;
+  transition-duration: 150ms;
+}
+
+.web-menu__button-spinner {
+  margin-left: 1rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: 0.125rem solid var(--color-spinner-bg);
+  border-top: 0.125rem solid var(--color-spinner-fg);
+  animation: spin 800ms linear infinite;
 }
 
 @media screen and (min-width: 375px) {
@@ -98,8 +153,8 @@
 
   .web-menu__button-group {
     flex-direction: row;
-    margin-top: 0;
-    margin-bottom: 0;
+    padding-top: 2rem;
+    padding-bottom: 0;
   }
 
   .web-menu__button {
@@ -138,8 +193,8 @@
   }
 
   .web-menu__button-group {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
     flex: none;
     flex-direction: column;
   }
@@ -147,7 +202,7 @@
   .web-menu__button {
     flex: none;
     height: 3rem;
-    padding: 0 0 0 1.75rem;
+    padding: 0 1.75rem;
     text-align: left;
   }
 }
