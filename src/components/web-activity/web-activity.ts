@@ -1,7 +1,9 @@
+import { gsap } from "gsap";
+
 class WebActivity extends HTMLLIElement {
   [key: string]: any;
   #initialMount = true;
-  #initialAnimation = true;
+  hasFadeInAnimation = false;
   #templateFragment: DocumentFragment;
   #activity?: AppData.Activity;
   #animationTimeline?: gsap.core.Timeline;
@@ -74,13 +76,15 @@ class WebActivity extends HTMLLIElement {
     this.upgradeProperty("period");
     this.upgradeProperty("animationTimeline");
     this.animationTimeline?.from(this.bottomRowElement, {
-      onComplete: () => { if (this.#animationTimeline) this.#initialAnimation = false; },
       opacity: 0,
       x: "2rem",
-      duration: 1,
-      ease: "power1",
+      duration: 0.5,
+      ease: "back",
       clearProps: "all",
-    }, "initial");
+      onComplete: () => {
+        if (!this.hasFadeInAnimation) this.hasFadeInAnimation = true;
+      }
+    }, "fadeIn");
   }
 
   upgradeProperty(prop: string) {
@@ -94,21 +98,35 @@ class WebActivity extends HTMLLIElement {
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
       case "data-period":
-        if (this.isConnected && !this.#initialAnimation) {
-          this.animationTimeline?.restart();
-        }
-        if (typeof newValue === "string") { 
-          const currentValue = this.activity.timeframes[newValue].current;
-          const previousValue = this.activity.timeframes[newValue].previous;
-          this.currentElement.textContent = `${String(currentValue)}${currentValue > 1 ? "hrs" : "hr"}`;
-          this.previousElement.textContent = `Last ${newValue} - ${String(previousValue)}${previousValue > 1 ? "hrs" : "hr"}`;
+        if (this.isConnected && this.hasFadeInAnimation) {
+          gsap.to(this.bottomRowElement, {
+            opacity: 0,
+            x: "-2rem",
+            duration: 0.5,
+            ease: "circ",
+            onComplete: () => {
+              this.displayPeriodActivityDetails(newValue);
+              this.animationTimeline?.restart();
+            }
+          });
         } else {
-          this.currentElement.textContent = "";
-          this.previousElement.textContent = "";
+          this.displayPeriodActivityDetails(newValue);
         }
         break;
       default:
         throw new Error("The modified attribute is not valid");
+    }
+  }
+
+  displayPeriodActivityDetails(period: string | null) {
+    if (typeof period === "string") {
+      const currentValue = this.activity.timeframes[period].current;
+      const previousValue = this.activity.timeframes[period].previous;
+      this.currentElement.textContent = `${String(currentValue)}${currentValue > 1 ? "hrs" : "hr"}`;
+      this.previousElement.textContent = `Last ${period} - ${String(previousValue)}${previousValue > 1 ? "hrs" : "hr"}`;
+    } else {
+      this.currentElement.textContent = "";
+      this.previousElement.textContent = "";
     }
   }
 }

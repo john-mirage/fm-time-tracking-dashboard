@@ -77,6 +77,7 @@ class WebActivityList extends HTMLUListElement {
     this.upgradeProperty("webActivities");
     this.upgradeProperty("activities");
     this.activities = activities;
+    this.#animationTimeline.restart();
   }
 
   upgradeProperty(prop: string) {
