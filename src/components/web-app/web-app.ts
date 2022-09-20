@@ -56,7 +56,6 @@ class WebApp extends HTMLElement {
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     switch (name) {
       case "data-period":
-        console.log("period has changed on web app");
         this.webActivityList.period = newValue !== null ? newValue : undefined;
         break;
       default:
@@ -67,7 +66,6 @@ class WebApp extends HTMLElement {
   handlePeriodUpdate(customEvent: Event) {
     const { period } = (<CustomEvent>customEvent).detail;
     this.period = period;
-    console.log("period is now: ", period);
   }
 
   handlePeriodHasBeenUpdated() {

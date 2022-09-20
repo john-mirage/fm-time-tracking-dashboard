@@ -84,8 +84,7 @@
   border-bottom-right-radius: 0.875rem;
   overflow: hidden;
   animation-name: fadeInDown;
-  animation-delay: 300ms;
-  animation-duration: 600ms;
+  animation-duration: 300ms;
   animation-fill-mode: backwards;
 }
 

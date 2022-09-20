@@ -10,7 +10,6 @@ class WebActivityList extends HTMLUListElement {
   #webActivity = <WebActivity>document.createElement("li", { is: "web-activity" });
   #animationTimeline = gsap.timeline({
     onComplete: () => {
-      console.log("finish")
       const customEvent = new CustomEvent("period-has-been-updated", { bubbles: true });
       this.dispatchEvent(customEvent);
     }
