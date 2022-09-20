@@ -84,7 +84,8 @@
   border-bottom-right-radius: 0.875rem;
   overflow: hidden;
   animation-name: fadeInDown;
-  animation-duration: 1000ms;
+  animation-delay: 300ms;
+  animation-duration: 600ms;
   animation-fill-mode: backwards;
 }
 
@@ -159,10 +160,18 @@
   }
 
   .web-menu__button {
+    position: relative;
     flex: 1;
     justify-content: center;
     height: 4.375rem;
     padding: 0;
+  }
+
+  .web-menu__button-spinner {
+    position: absolute;
+    margin-left: -0.5rem;
+    bottom: 0.5rem;
+    left: 50%;
   }
 }
 
@@ -201,9 +210,18 @@
   }
 
   .web-menu__button {
+    position: static;
     flex: none;
     justify-content: flex-start;
     height: 3rem;
     padding: 0 1.75rem;
+  }
+
+  .web-menu__button-spinner {
+    position: static;
+    bottom: auto;
+    left: auto;
+    margin-left: 0.5rem;
+    transform: none;
   }
 }
