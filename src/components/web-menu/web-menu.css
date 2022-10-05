@@ -1,14 +1,3 @@
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -83,9 +72,6 @@
   border-bottom-left-radius: 0.875rem;
   border-bottom-right-radius: 0.875rem;
   overflow: hidden;
-  animation-name: fadeInDown;
-  animation-duration: 300ms;
-  animation-fill-mode: backwards;
 }
 
 .web-menu__button {

@@ -5,6 +5,14 @@
     background-color: var(--color-very-dark-blue);
 }
 
+.page--preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
 .page__icons {
   display: none;
 }

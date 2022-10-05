@@ -12,3 +12,7 @@ customElements.define("web-activity-list", WebActivityList, { extends: "ul" });
 customElements.define("web-activity", WebActivity, { extends: "li" });
 
 gsap.registerPlugin(CSSPlugin);
+
+document.body.addEventListener("load", () => {
+  document.body.classList.remove("page--preload");
+});
