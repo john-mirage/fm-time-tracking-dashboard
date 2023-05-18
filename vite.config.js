@@ -3,7 +3,6 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/time-tracking-dashboard/",
   resolve: {
     alias: {
       '@components': resolve(__dirname, 'src/components'),
